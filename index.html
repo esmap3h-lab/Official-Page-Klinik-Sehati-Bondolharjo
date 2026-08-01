@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Klinink Sehati Unit Bondolharjo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+
+  <header>
+    <!-- Logo -->
+    <img src="assets/logo-esma.png" alt="foto ESMA biru" class="logo">
+
+    <!-- Greeting mesin ketik -->
+    <h1 id="greeting"></h1>
+
+    <!-- Info waktu & tanggal -->
+    <div id="datetime-display"></div>
+
+    <!-- Toggle Dark Mode -->
+    <button id="dark-mode-toggle" title="Light/Dark Mode">🌙</button>
+
+  </header>
+
+<!-- ===== SIDEBAR MENGAMBANG (KIRI) ===== -->
+<div id="sidebar-toggle-btn" title="Buka Dashboard">☰</div>
+
+<div id="sidebar" class="sidebar closed">
+  <button id="sidebar-close-btn">✕</button>
+
+  <!-- Tab navigasi -->
+  <div class="sidebar-tabs">
+    <button class="tab-btn active" data-tab="timer">⏱ Timer</button>
+    <button class="tab-btn" data-tab="todo">📝 To-Do</button>
+    <button class="tab-btn" data-tab="links">🔗 Links</button>
+  </div>
+
+  <!-- ===== PANEL TIMER ===== -->
+  <div class="tab-panel active" id="panel-timer">
+    <h3 class="sidebar-title">Focus Timer</h3>
+    <div id="pomodoro-display">25:00</div>
+    <div class="timer-controls">
+      <button id="timer-start">▶ Start</button>
+      <button id="timer-stop">⏸ Stop</button>
+      <button id="timer-reset">↺ Reset</button>
+    </div>
+    <div class="timer-setting">
+      <label>Durasi (menit):
+        <input type="number" id="timer-duration" value="25" min="1" max="120">
+      </label>
+      <button id="timer-set">Set</button>
+    </div>
+  </div>
+
+  <!-- ===== PANEL TO-DO ===== -->
+  <div class="tab-panel" id="panel-todo">
+    <h3 class="sidebar-title">To-Do List</h3>
+    <div class="todo-input-row">
+      <input type="text" id="todo-input" placeholder="Tambah tugas...">
+      <button id="todo-add-btn">+</button>
+    </div>
+    <div class="todo-sort-row">
+      <label>Urutkan:
+        <select id="todo-sort">
+          <option value="default">Default</option>
+          <option value="az">A → Z</option>
+          <option value="done">Selesai dulu</option>
+        </select>
+      </label>
+    </div>
+    <ul id="todo-list"></ul>
+  </div>
+
+  <!-- ===== PANEL QUICK LINKS ===== -->
+  <div class="tab-panel" id="panel-links">
+    <h3 class="sidebar-title">Quick Links</h3>
+    <div class="link-input-group">
+      <input type="text" id="link-name-input" placeholder="Nama link">
+      <input type="url" id="link-url-input" placeholder="https://...">
+      <button id="link-add-btn">+ Tambah</button>
+    </div>
+    <ul id="quick-links-list"></ul>
+  </div>
+</div>
+
+  <!-- ===== MAIN SECTION ===== -->
+<section class="main-background">
+
+  <!-- Konten Landing Page -->
+  <div class="landing-page">
+    <h1 class="judul">Klinik Sehati Unit Bondolharjo</h1>
+    <h1 class="deskripsi">Sahabat Halal bagi UMKM dan Halal Advisor area Jawa Tengah</h2>
+    <div class="link-row">
+      <a href="https://bit.ly/SEHATI-Jateng" class="teks-ungu">Pendaftaran Sertifikat Halal Gratis</a>
+      <a href="https://bit.ly/Esma-P3h" class="teks-ungu">Pendaftaran Pendamping Halal</a>
+    </div>
+    <img src="assets/logo-halal.png" alt="Logo Halal" class="halal-logo">
+    </div>
+</section>
+
+<!-- Menu Cek Status Pengajuan Sertifikat Halal -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Cek Status Pengajuan Sertifikat Halal</h1>
+    <h2 class="hero-subtitle">Masukkan Nomor Induk Kependudukan ( NIK ) Anda</h2>
+
+<!-- Form Cek Status -->  
+    <form id="status-form">
+     <div class="nik-container">
+      <input type="text" id="nik" placeholder="Masukkan 16 digit NIK anda" required>
+      <button type="submit" id="cek-btn">Cek Status</button>
+    </form>
+    </div>
+    <div id="result"></div>
+
+    <!-- Logo Sponsor dan Contact Person -->
+    <h2 class="hero-subtitle">Klinik Sehati Unit Bondolharjo didukung Oleh:</h2>
+
+    <!-- Logo sponsor -->
+    <div class="sponsor-logos">
+      <img src="assets/ewi.png" alt="Logo EWI" class="sponsor-logo">
+      <img src="assets/kemenpar.png" alt="Logo BPJPH" class="sponsor-logo">
+      <img src="assets/sihati.png" alt="Logo Swakarta" class="sponsor-logo">
+    </div>
+
+    <!-- Licensed By -->
+    <p class="licensed">Licensed By Siti Maesaroh - 2503002531 (2026)</p>
+  </div>
+  </section>
+
+<!-- Script di akhir -->
+  <script src="script.js"></script>
+
+  <!-- Tombol WhatsApp + Label mengambang di kanan bawah -->
+  <div class="wa-wrapper">
+    <div class="wa-label-box">Layanan Pengaduan</div>
+    <a href="https://bit.ly/wa.me/628989096818" class="whatsapp-float" target="_blank" title="Hubungi via WhatsApp">
+      <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="24" fill="#25D366"/>
+        <path fill="#fff" d="M24 10C16.27 10 10 16.27 10 24c0 2.52.68 4.88 1.87 6.93L10 38l7.3-1.83A13.93 13.93 0 0 0 24 38c7.73 0 14-6.27 14-14S31.73 10 24 10zm6.94 19.39c-.29.82-1.7 1.57-2.33 1.63-.6.06-1.16.27-3.9-.81-3.27-1.28-5.37-4.63-5.53-4.85-.16-.22-1.3-1.73-1.3-3.3s.82-2.34 1.11-2.66c.29-.32.64-.4.85-.4l.61.01c.2 0 .46-.08.72.55.27.64.92 2.25.99 2.41.08.16.13.35.03.56-.1.2-.15.33-.3.51-.16.18-.33.4-.47.54-.16.16-.32.33-.14.65.18.32.82 1.35 1.76 2.19 1.21 1.08 2.23 1.41 2.55 1.57.32.16.51.13.7-.08.18-.2.79-.92 1-1.24.21-.32.42-.27.71-.16.29.11 1.84.87 2.16 1.03.32.16.53.24.61.37.08.14.08.78-.21 1.6z"/>
+      </svg>
+    </a>
+  </div>
+</body>
+</html>

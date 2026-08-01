@@ -1,0 +1,709 @@
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  background-image: url("images/background.png"); /* arahkan ke lokasi file gambar */
+  background-size: cover;       /* agar gambar memenuhi seluruh layar */
+  background-position: center;  /* posisi gambar di tengah */
+  background-repeat: no-repeat; /* supaya tidak diulang */
+}
+
+#greeting {
+  font-family: 'Times New Roman', Times, serif;
+  color: #f1f3f5d8;
+  font-size: 30px;
+  max-width: 75%;
+  white-space: normal;        /* izinkan turun baris */
+  overflow: visible;          /* jangan sembunyikan teks */
+  border-right: 2px solid rgb(237, 240, 237); /* kursor */
+  animation: blinkCursor 0.7s infinite;
+  word-wrap: break-word;
+  text-align: center;
+  text-transform: none;       /* pastikan tidak uppercase */
+}
+
+
+/* ===== HEADER ===== */
+header {
+  background-color: purple;   /* warna ungu */
+  height: 2cm;              /* tinggi header */
+  display: flex;              /* sejajarkan isi */
+  align-items: center;        /* vertikal rata tengah */
+  justify-content: center;    /* horizontal rata tengah */
+  gap: 0.5cm;
+  padding: 0.5cm;
+  flex-wrap: wrap; /* biar responsif */
+}
+
+/* Logo bulat dengan animasi */
+.logo {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  border: 4px solid green;
+  animation: flipLogo 4s ease-in-out infinite;
+}
+
+@keyframes flipLogo {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+/* Greeting mesin ketik responsif */
+#greeting {
+  font-family: 'Times New Roman', Times, serif;
+  color: #f1f3f5d8;
+  font-size: 40px;
+  max-width: 90%;
+  white-space: normal;   /* izinkan turun baris */
+  overflow: visible;     /* jangan sembunyikan teks */
+  border-right: 2px solid rgb(237, 240, 237); /* kursor */
+  animation: blinkCursor 0.7s infinite;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+@keyframes blinkCursor {
+  from { border-color: transparent; }
+  to   { border-color: green; }
+}
+
+/* Deskripsi Landing Page */
+
+.landing-page{
+  display: flex;              /* aktifkan flexbox */
+  flex-direction: column;     /* konten ditumpuk vertikal */
+  align-items: center;        /* center horizontal */
+  justify-content: center;    /* center vertical */
+  text-align: center;         /* teks rata tengah */
+  padding: 0px;
+}
+
+/* Heading */
+h1, h2 {
+  font-family: 'Times New Roman', Times, serif, serif;
+  font-weight: bold;
+  color: rgb(11, 230, 127);
+  font-size: 36pt;
+  padding: 0;
+}
+
+/* Link di paragraf */
+p a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 24pt;
+  margin: 10pt;
+}
+
+p a:hover {
+  color: purple;
+  transition: color 0.3s;
+}
+
+/* Logo halal dengan animasi */
+.halal-logo {
+  display: block;
+  margin: 0.5cm auto 0 auto;
+  width: 100%;
+  max-width: 500px;
+  animation: bounceFlip 6s infinite ease-in-out;
+  margin-bottom: 0;
+}
+
+@keyframes bounceFlip {
+  0% { transform: translateY(0) rotateY(0deg); }
+  50% { transform: translateY(-20px) rotateY(180deg); }
+  100% { transform: translateY(0) rotateY(0deg); }
+}
+
+.halal-logo {
+  display: block;              /* pastikan logo dianggap elemen blok */
+  margin: 0.5cm auto 0 auto;     /* jarak atas 2 cm dari teks, auto kiri-kanan agar center */
+  width: 100%;
+  max-width: 400px;
+  animation: bounceFlip 6s infinite ease-in-out;
+  margin-bottom: 1cm;
+}
+
+.judul {
+  font-family: 'Times New Roman', Times, serif;
+  color: rgb(3, 65, 26);       /* warna teks judul */
+  font-size: 50px;   /* ukuran font lebih besar */
+  padding: 0;
+  margin-bottom: 1cm;
+}
+
+.deskripsi {
+  font-family: 'Times New Roman', Times, serif;
+  color: darkgreen;  /* warna teks deskripsi */
+  font-size: 30px;   /* ukuran font lebih besar */
+  padding: 0;
+}
+
+.teks-ungu {            /*warna link pendaftaran */
+  color: rgb(247, 244, 247);
+  margin-bottom: 0;
+  padding: 5px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.teks-ungu:hover {
+  color: rgb(49, 1, 49);
+  transition: color 0.3s;
+}
+
+.teks-ungu:active {
+  color: darkmagenta;
+}
+
+.link-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2cm;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.main-background {
+  background-image: url("assets/background.png"); /* sesuaikan path gambar */
+  background-size: cover;       /* gambar memenuhi area section */
+  background-position: center;  /* posisi gambar di tengah */
+  background-repeat: no-repeat; /* tidak diulang */
+  min-height: 100vh;            /* tinggi minimal layar penuh */
+}
+
+/* Deskripsi Hero */
+
+.hero {
+  min-height: 20cm; /* sesuai permintaan */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  background: linear-gradient(135deg, green, white, purple);
+  animation: gradientMove 10s ease infinite;
+  position: relative; /* agar bisa menempatkan logo WA */
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-title {
+  font-size: 36pt;
+  font-family: 'Times New Roman', Times, serif;
+  color: purple;
+  animation: slideText 10s linear infinite;
+}
+
+.hero-subtitle {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 30pt;
+  font-weight: bold;
+  color: green;
+  margin-top: 40px;
+}
+
+.nik-container {
+  margin-top: 30px;
+}
+
+.nik-container input {
+  padding: 10px;
+  width: 300px;
+  border: 2px solid purple;
+  border-radius: 5px;
+}
+
+.nik-container button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  background-color: purple;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#cek-btn:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+#result {
+  margin-bottom: 5cm; /* jarak antara area hasil cek status dengan h2 sponsor di bawahnya */
+}
+
+.nik-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  border: 3px solid purple;       /* garis tepi ungu bold */
+  box-shadow: 0 0 10px white;     /* shading putih di luar */
+  height: 75px;                   /* ±2 cm (2 cm ≈ 75px) */
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.nik-container input {
+  padding: 10px;
+  width: 300px;
+  border: 2px solid purple;
+  border-radius: 5px;
+  height: 40px;                   /* agar proporsional */
+}
+
+.nik-container button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  background-color: purple;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 40px;
+}
+
+/* Kontainer hasil cek NIK */
+.result-container {
+  background-color: rgba(255, 255, 255, 0.92);
+  border: 2px solid purple;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin-top: 20px;
+  text-align: left;
+  display: inline-block;
+  min-width: 400px;
+}
+
+/* Teks keterangan di luar tombol — 26pt */
+.result-label {
+  font-size: 26pt;
+  font-weight: bold;
+  color: darkgreen;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Tombol Lihat Dokumen — 12pt */
+.btn-view {
+  display: inline-block;
+  font-size: 12pt;
+  padding: 6px 14px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: green;
+  color: white;
+}
+
+.btn-view:hover {
+  background-color: darkgreen;
+}
+
+/* Tombol download kecil khusus Logo Halal */
+.btn-download-small {
+  display: inline-block;
+  font-size: 10pt;
+  padding: 4px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: purple;
+  color: white;
+  margin-left: 6px;
+}
+
+.btn-download-small:hover {
+  background-color: #5a005a;
+}
+
+.sponsor-logos {
+  display: flex;
+  align-items: center;      /* semua logo rata tengah secara vertikal */
+  justify-content: center;  /* rata tengah horizontal */
+  gap: 2cm;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.sponsor-logo {
+  height: 80px;   /* tinggi seragam sesuai dokumen asli */
+  width: auto;    /* lebar menyesuaikan proporsi asli masing-masing logo */
+  object-fit: contain;
+}
+
+.licensed {
+  margin-top: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  color: darkgreen;
+}
+
+/* Wrapper WhatsApp + Label mengambang di kanan bawah */
+.wa-wrapper {
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  animation: waPulse 4s ease-in-out infinite;
+}
+
+@keyframes waPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* Label "Layanan Pengaduan" */
+.wa-label-box {
+  background-color: white;
+  color: #25D366;
+  font-size: 20pt;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 6px 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Link WhatsApp */
+.whatsapp-float {
+  text-decoration: none;
+  display: block;
+}
+
+/* Ikon SVG WhatsApp */
+.wa-icon {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover .wa-icon {
+  transform: scale(1.15);
+}
+
+/* ===== EFEK SALJU ===== */
+#snow-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* klik tetap tembus ke konten di bawah */
+  z-index: 9999;        /* tampil di atas semua elemen */
+}
+
+/* ===== DATETIME DISPLAY DI HEADER ===== */
+#datetime-display {
+  color: #e8ffe8;
+  font-size: 13px;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  opacity: 0.9;
+}
+
+/* ===== DARK MODE TOGGLE ===== */
+#dark-mode-toggle {
+  background: none;
+  border: 2px solid white;
+  color: white;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#dark-mode-toggle:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ===== DARK MODE STYLES ===== */
+body.dark-mode {
+  filter: brightness(0.88) saturate(0.9);
+}
+body.dark-mode .result-container {
+  background-color: rgba(30,30,30,0.95);
+  color: #eee;
+}
+body.dark-mode .result-label {
+  color: #80ffb0;
+}
+
+/* ===== SIDEBAR TOGGLE BUTTON ===== */
+#sidebar-toggle-btn {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color: purple;
+  color: white;
+  font-size: 22px;
+  padding: 12px 10px;
+  cursor: pointer;
+  border-radius: 0 8px 8px 0;
+  z-index: 1100;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+  user-select: none;
+  transition: background 0.3s;
+}
+#sidebar-toggle-btn:hover {
+  background-color: darkviolet;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 300px;
+  background: rgba(20, 10, 40, 0.97);
+  color: white;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.5);
+  overflow-y: auto;
+  transition: transform 0.35s ease;
+  box-sizing: border-box;
+}
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+.sidebar.open {
+  transform: translateX(0);
+}
+
+#sidebar-close-btn {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+#sidebar-close-btn:hover { color: white; }
+
+/* ===== SIDEBAR TABS ===== */
+.sidebar-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 6px 4px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+.tab-btn:hover { background: rgba(255,255,255,0.2); }
+.tab-btn.active {
+  background: purple;
+  color: white;
+  border-color: purple;
+}
+
+/* ===== TAB PANELS ===== */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.sidebar-title {
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+  color: #d4b8ff;
+  margin: 0 0 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 6px;
+}
+
+/* ===== POMODORO TIMER ===== */
+#pomodoro-display {
+  font-size: 52px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffdf80;
+  letter-spacing: 4px;
+  margin: 8px 0;
+  font-family: monospace;
+}
+.timer-controls {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.timer-controls button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+}
+#timer-start { background: #25D366; color: white; }
+#timer-stop  { background: #e67e22; color: white; }
+#timer-reset { background: #95a5a6; color: white; }
+.timer-setting {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #ccc;
+}
+.timer-setting input {
+  width: 55px;
+  padding: 4px;
+  border-radius: 4px;
+  border: none;
+  text-align: center;
+}
+#timer-set {
+  padding: 4px 10px;
+  background: purple;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ===== TO-DO LIST ===== */
+.todo-input-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.todo-input-row input {
+  flex: 1;
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+  font-size: 13px;
+}
+#todo-add-btn {
+  padding: 6px 12px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+.todo-sort-row {
+  font-size: 12px;
+  color: #ccc;
+  margin-bottom: 8px;
+}
+.todo-sort-row select {
+  padding: 3px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+#todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px;
+}
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+.todo-text { flex: 1; }
+.todo-check { cursor: pointer; font-size: 15px; }
+.todo-edit, .todo-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px;
+}
+
+/* ===== QUICK LINKS ===== */
+.link-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.link-input-group input {
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+  font-size: 13px;
+}
+#link-add-btn {
+  padding: 6px;
+  background: purple;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+#quick-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.link-btn {
+  flex: 1;
+  color: #80cfff;
+  text-decoration: none;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.link-btn:hover { text-decoration: underline; }
+.link-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
