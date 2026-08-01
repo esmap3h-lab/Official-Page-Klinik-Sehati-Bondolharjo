@@ -1,7 +1,7 @@
 /* ===== GLOBAL ===== */
 body {
   margin: 0;
-  background-image: url("images/background.png"); /* arahkan ke lokasi file gambar */
+  background-image: url("assets/background.png");
   background-size: cover;       /* agar gambar memenuhi seluruh layar */
   background-position: center;  /* posisi gambar di tengah */
   background-repeat: no-repeat; /* supaya tidak diulang */
