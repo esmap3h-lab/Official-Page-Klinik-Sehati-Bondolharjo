@@ -29,49 +29,235 @@ const savedName = localStorage.getItem('customName');
 const baseName = savedName ? savedName : "Sahabat Halal";
 const greetingText = `Layanan Pendampingan Produk Halal area Jawa Tengah`;
 const greetingElement = document.getElementById("greeting");
+const greetingPhoto = document.querySelector('.header-brand .logo');
+const TYPEWRITER_SPEED = 80;
 
 let index = 0;
 function typeWriter() {
+  if (!greetingElement) return;
+
+  if (index === 0 && greetingPhoto) {
+    greetingPhoto.classList.remove('typing-reveal');
+    greetingPhoto.style.setProperty('--typing-duration', `${greetingText.length * TYPEWRITER_SPEED}ms`);
+    void greetingPhoto.offsetWidth;
+    greetingPhoto.classList.add('typing-reveal');
+  }
+
   if (index < greetingText.length) {
     greetingElement.textContent += greetingText.charAt(index);
     index++;
-    setTimeout(typeWriter, 80);
+    setTimeout(typeWriter, TYPEWRITER_SPEED);
+    return;
   }
+
+  setTimeout(() => {
+    index = 0;
+    greetingElement.textContent = "";
+    typeWriter();
+  }, 5000);
 }
 typeWriter();
 
 // ===== CEK STATUS DOKUMEN =====
 const form = document.getElementById("status-form");
-const nikInput = document.getElementById("nik");
+const registrationInput = document.getElementById("registration-no");
 const cekBtn = document.getElementById("cek-btn");
 const resultDiv = document.getElementById("result");
+const documentViewer = document.getElementById('document-viewer');
+const documentViewerTitle = document.getElementById('document-viewer-title');
+const documentPdf = document.getElementById('document-pdf');
+const documentImage = document.getElementById('document-image');
+const printServiceLink = document.getElementById('print-service-link');
 
-cekBtn.disabled = false;
+const VERIFICATION_LIMIT = 2;
+const verificationAttempts = {};
+let activeRegistrationCode = "";
 
-form.addEventListener("submit", function(e) {
-  e.preventDefault();
-  const nik = nikInput.value.trim();
-  if (/^\d{16}$/.test(nik)) {
-    resultDiv.innerHTML = `
-      <div class="result-container">
-        <p class="result-label">NIB: Sudah Terbit ✅
-          <a class="btn-view" href="documents/nib.pdf" target="_blank">Lihat Dokumen</a>
-        </p>
-        <p class="result-label">Sertifikat Halal: Sudah Jadi ✅
-          <a class="btn-view" href="documents/sertifikat.pdf" target="_blank">Lihat Dokumen</a>
-        </p>
-        <p class="result-label">Logo Halal: Sudah Tersedia ✅
-          <a class="btn-view" href="documents/logo-halal.png" target="_blank" id="btn-logo-halal">Lihat Dokumen</a>
-          <a class="btn-download-small" href="documents/logo-halal.png" download id="btn-dl-logo" style="display:none;">⬇ Download Logo</a>
-        </p>
+const DATABASE_MAP = {
+  "sehati.0001": [
+    { file: 'nib.pdf', label: 'NIB' },
+    { file: 'sertifikat.pdf', label: 'Sertifikat Halal' },
+    { file: 'STIKER HALAL.png', label: 'Stiker Halal' }
+  ]
+};
+
+async function loadDatabaseMap() {
+  try {
+    if (window.location.protocol === 'file:') {
+      return DATABASE_MAP;
+    }
+
+    const response = await fetch('database/index.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('Database map not found');
+    return await response.json();
+  } catch (error) {
+    console.warn('Menggunakan map lokal karena file database tidak dapat dimuat:', error);
+    return DATABASE_MAP;
+  }
+}
+
+function getLastFourDigits(code) {
+  const match = String(code).match(/(\d{4})$/);
+  return match ? match[1] : "";
+}
+
+function openDocumentViewer(docKey, fileLink) {
+  const isPdf = /\.pdf$/i.test(fileLink.split('?')[0]);
+  documentViewerTitle.textContent = docKey;
+  documentPdf.hidden = !isPdf;
+  documentImage.hidden = isPdf;
+
+  if (isPdf) {
+    documentImage.removeAttribute('src');
+    documentPdf.src = fileLink;
+  } else {
+    documentPdf.removeAttribute('src');
+    documentImage.src = fileLink;
+  }
+
+  const message = encodeURIComponent(`Halo Mbak Esma, saya ingin menggunakan layanan cetak untuk dokumen ${docKey}.`);
+  printServiceLink.href = `https://wa.me/628989096818?text=${message}`;
+  documentViewer.showModal();
+}
+
+function handleDocumentAccess(docKey, fileLink) {
+  const codeToVerify = getLastFourDigits(activeRegistrationCode);
+  const currentAttempt = verificationAttempts[docKey] || 0;
+
+  if (currentAttempt >= VERIFICATION_LIMIT) {
+    alert('Waktu Time Out');
+    window.location.href = 'index.html';
+    return;
+  }
+
+  const inputCode = prompt('Masukkan kode verifikasi anda');
+  const enteredCode = String(inputCode || '').trim();
+
+  if (enteredCode === codeToVerify) {
+    verificationAttempts[docKey] = 0;
+    openDocumentViewer(docKey, fileLink);
+    return;
+  }
+
+  verificationAttempts[docKey] = currentAttempt + 1;
+
+  if (verificationAttempts[docKey] >= VERIFICATION_LIMIT) {
+    alert('Waktu Time Out');
+    window.location.href = 'index.html';
+    return;
+  }
+
+  alert('Verifikasi gagal');
+}
+
+function renderDocumentList(files, folderName) {
+  activeRegistrationCode = folderName;
+  const rows = files.map(item => {
+    const fileName = item.file || item;
+    const labelName = item.label || fileName;
+    const href = `database/${folderName}/${fileName}`;
+    const docKey = `${folderName}-${fileName}`;
+    return `
+      <div class="result-row">
+        <span class="result-label">${labelName}: Tersedia ✅</span>
+        <a class="btn-view doc-link" href="${href}" data-doc-key="${docKey}" data-file-link="${href}" target="_blank" rel="noopener noreferrer">Lihat Dokumen</a>
       </div>
     `;
-    document.getElementById('btn-logo-halal').addEventListener('click', function () {
-      document.getElementById('btn-dl-logo').style.display = 'inline-block';
+  }).join('');
+
+  return `
+    <div class="result-container">
+      <p class="result-meta">Nomor Registrasi: <strong>${folderName}</strong></p>
+      ${rows}
+    </div>
+  `;
+}
+
+if (cekBtn) cekBtn.disabled = false;
+
+if (form) {
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const rawRegistrationCode = registrationInput ? registrationInput.value.trim() : "";
+    const normalizedCode = rawRegistrationCode.toLowerCase();
+
+    if (!/^[A-Za-z0-9._-]{5,30}$/.test(rawRegistrationCode)) {
+      resultDiv.innerHTML = `<p style="color:red;">❌ Nomor registrasi tidak valid. Gunakan huruf, angka, titik, atau tanda hubung.</p>`;
+      return;
+    }
+
+    const databaseMap = await loadDatabaseMap();
+    const folderFiles = databaseMap[normalizedCode] || databaseMap[rawRegistrationCode];
+
+    if (folderFiles && folderFiles.length) {
+      resultDiv.innerHTML = renderDocumentList(folderFiles, normalizedCode);
+      return;
+    }
+
+    const folderPath = `database/${normalizedCode}`;
+    const directFiles = [
+      { file: 'nib.pdf', label: 'NIB' },
+      { file: 'sertifikat.pdf', label: 'Sertifikat Halal' },
+      { file: 'STIKER HALAL.png', label: 'Stiker Halal' }
+    ];
+
+    const fallbackFiles = directFiles.filter(file => {
+      const path = `${folderPath}/${file.file}`;
+      return path.length > 0;
     });
-  } else {
-    resultDiv.innerHTML = `<p style="color:red;">❌ NIK tidak valid. Harus 16 digit angka.</p>`;
-  }
+
+    if (fallbackFiles.length) {
+      resultDiv.innerHTML = renderDocumentList(fallbackFiles, normalizedCode);
+      return;
+    }
+
+    resultDiv.innerHTML = `<p style="color:red;">❌ Nomor registrasi <strong>${rawRegistrationCode}</strong> tidak ditemukan di database.</p>`;
+  });
+}
+
+resultDiv.addEventListener('click', function(e) {
+  const link = e.target.closest('.doc-link');
+  if (!link) return;
+
+  e.preventDefault();
+  const docKey = link.dataset.docKey;
+  const fileLink = link.dataset.fileLink;
+  handleDocumentAccess(docKey, fileLink);
+});
+
+const scrollNotice = document.getElementById('scroll-notice');
+const scrollNoticeToggle = document.getElementById('scroll-notice-toggle');
+
+if (scrollNotice && scrollNoticeToggle) {
+  scrollNoticeToggle.addEventListener('click', function() {
+    const isExpanded = scrollNoticeToggle.getAttribute('aria-expanded') === 'true';
+    scrollNotice.classList.toggle('is-collapsed', isExpanded);
+    scrollNoticeToggle.setAttribute('aria-expanded', String(!isExpanded));
+    scrollNoticeToggle.setAttribute('aria-label', isExpanded ? 'Perluas notifikasi' : 'Ciutkan notifikasi');
+    scrollNoticeToggle.textContent = isExpanded ? '+' : '−';
+  });
+}
+
+if (scrollNotice) {
+  const updateScrollNoticeVisibility = () => {
+    scrollNotice.classList.toggle('is-hidden', window.scrollY > 180);
+  };
+  window.addEventListener('scroll', updateScrollNoticeVisibility, { passive: true });
+  updateScrollNoticeVisibility();
+}
+
+document.getElementById('close-document-viewer').addEventListener('click', function() {
+  documentViewer.close();
+});
+
+documentViewer.addEventListener('click', function(e) {
+  if (e.target === documentViewer) documentViewer.close();
+});
+
+documentViewer.addEventListener('close', function() {
+  documentPdf.removeAttribute('src');
+  documentImage.removeAttribute('src');
 });
 
 // ===== DARK MODE =====
@@ -89,200 +275,6 @@ if (darkBtn) {
     applyDark(isDark);
   });
 }
-
-// ===== SIDEBAR TOGGLE =====
-const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
-const sidebar = document.getElementById('sidebar');
-const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
-
-sidebarToggleBtn.addEventListener('click', () => {
-  sidebar.classList.toggle('closed');
-  sidebar.classList.toggle('open');
-});
-sidebarCloseBtn.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-  sidebar.classList.add('closed');
-});
-
-// Tab switching
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
-  });
-});
-
-// ===== POMODORO TIMER =====
-let pomodoroTotal = 25 * 60; // detik
-let pomodoroLeft  = pomodoroTotal;
-let pomodoroInterval = null;
-let pomodoroRunning  = false;
-
-function updatePomodoroDisplay() {
-  const m = String(Math.floor(pomodoroLeft / 60)).padStart(2,'0');
-  const s = String(pomodoroLeft % 60).padStart(2,'0');
-  document.getElementById('pomodoro-display').textContent = `${m}:${s}`;
-}
-
-document.getElementById('timer-start').addEventListener('click', () => {
-  if (pomodoroRunning) return;
-  pomodoroRunning = true;
-  pomodoroInterval = setInterval(() => {
-    if (pomodoroLeft <= 0) {
-      clearInterval(pomodoroInterval);
-      pomodoroRunning = false;
-      document.getElementById('pomodoro-display').textContent = '⏰ Selesai!';
-      return;
-    }
-    pomodoroLeft--;
-    updatePomodoroDisplay();
-  }, 1000);
-});
-
-document.getElementById('timer-stop').addEventListener('click', () => {
-  clearInterval(pomodoroInterval);
-  pomodoroRunning = false;
-});
-
-document.getElementById('timer-reset').addEventListener('click', () => {
-  clearInterval(pomodoroInterval);
-  pomodoroRunning = false;
-  pomodoroLeft = pomodoroTotal;
-  updatePomodoroDisplay();
-});
-
-document.getElementById('timer-set').addEventListener('click', () => {
-  const val = parseInt(document.getElementById('timer-duration').value);
-  if (val > 0 && val <= 120) {
-    clearInterval(pomodoroInterval);
-    pomodoroRunning = false;
-    pomodoroTotal = val * 60;
-    pomodoroLeft  = pomodoroTotal;
-    updatePomodoroDisplay();
-  }
-});
-
-// ===== TO-DO LIST =====
-let todos = JSON.parse(localStorage.getItem('todos') || '[]');
-
-function saveTodos() {
-  localStorage.setItem('todos', JSON.stringify(todos));
-}
-
-function getSortedTodos() {
-  const sort = document.getElementById('todo-sort').value;
-  const copy = [...todos];
-  if (sort === 'az')   return copy.sort((a,b) => a.text.localeCompare(b.text));
-  if (sort === 'done') return copy.sort((a,b) => b.done - a.done);
-  return copy;
-}
-
-function renderTodos() {
-  const list = document.getElementById('todo-list');
-  list.innerHTML = '';
-  getSortedTodos().forEach((todo, i) => {
-    const realIndex = todos.findIndex(t => t.id === todo.id);
-    const li = document.createElement('li');
-    li.className = 'todo-item' + (todo.done ? ' done' : '');
-    li.innerHTML = `
-      <span class="todo-check" data-i="${realIndex}">${todo.done ? '✅' : '⬜'}</span>
-      <span class="todo-text" data-i="${realIndex}">${todo.text}</span>
-      <button class="todo-edit" data-i="${realIndex}">✏️</button>
-      <button class="todo-delete" data-i="${realIndex}">🗑️</button>
-    `;
-    list.appendChild(li);
-  });
-
-  // Event listeners
-  list.querySelectorAll('.todo-check').forEach(el => {
-    el.addEventListener('click', () => {
-      todos[el.dataset.i].done = !todos[el.dataset.i].done;
-      saveTodos(); renderTodos();
-    });
-  });
-  list.querySelectorAll('.todo-edit').forEach(el => {
-    el.addEventListener('click', () => {
-      const newText = prompt('Edit tugas:', todos[el.dataset.i].text);
-      if (newText && newText.trim()) {
-        // Prevent duplicate on edit
-        const dup = todos.some((t, idx) => t.text.toLowerCase() === newText.trim().toLowerCase() && idx !== parseInt(el.dataset.i));
-        if (dup) { alert('Tugas sudah ada!'); return; }
-        todos[el.dataset.i].text = newText.trim();
-        saveTodos(); renderTodos();
-      }
-    });
-  });
-  list.querySelectorAll('.todo-delete').forEach(el => {
-    el.addEventListener('click', () => {
-      todos.splice(el.dataset.i, 1);
-      saveTodos(); renderTodos();
-    });
-  });
-}
-
-document.getElementById('todo-add-btn').addEventListener('click', () => {
-  const input = document.getElementById('todo-input');
-  const text = input.value.trim();
-  if (!text) return;
-  // Prevent duplicate
-  if (todos.some(t => t.text.toLowerCase() === text.toLowerCase())) {
-    alert('Tugas "' + text + '" sudah ada dalam daftar!');
-    return;
-  }
-  todos.push({ id: Date.now(), text, done: false });
-  saveTodos(); renderTodos();
-  input.value = '';
-});
-
-document.getElementById('todo-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') document.getElementById('todo-add-btn').click();
-});
-
-document.getElementById('todo-sort').addEventListener('change', renderTodos);
-
-renderTodos();
-
-// ===== QUICK LINKS =====
-let quickLinks = JSON.parse(localStorage.getItem('quickLinks') || '[]');
-
-function saveLinks() {
-  localStorage.setItem('quickLinks', JSON.stringify(quickLinks));
-}
-
-function renderLinks() {
-  const list = document.getElementById('quick-links-list');
-  list.innerHTML = '';
-  quickLinks.forEach((link, i) => {
-    const li = document.createElement('li');
-    li.className = 'link-item';
-    li.innerHTML = `
-      <a href="${link.url}" target="_blank" class="link-btn">🔗 ${link.name}</a>
-      <button class="link-delete" data-i="${i}">🗑️</button>
-    `;
-    list.appendChild(li);
-  });
-  list.querySelectorAll('.link-delete').forEach(el => {
-    el.addEventListener('click', () => {
-      quickLinks.splice(el.dataset.i, 1);
-      saveLinks(); renderLinks();
-    });
-  });
-}
-
-document.getElementById('link-add-btn').addEventListener('click', () => {
-  const name = document.getElementById('link-name-input').value.trim();
-  const url  = document.getElementById('link-url-input').value.trim();
-  if (!name || !url) return;
-  if (!url.startsWith('http')) { alert('URL harus dimulai dengan http:// atau https://'); return; }
-  quickLinks.push({ name, url });
-  saveLinks(); renderLinks();
-  document.getElementById('link-name-input').value = '';
-  document.getElementById('link-url-input').value = '';
-});
-
-renderLinks();
 
 // ===== EFEK SALJU =====
 (function () {

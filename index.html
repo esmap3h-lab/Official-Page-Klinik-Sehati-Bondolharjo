@@ -10,80 +10,21 @@
   <!-- ===== HEADER ===== -->
 
   <header>
-    <!-- Logo -->
-    <img src="assets/logo-esma.png" alt="foto ESMA biru" class="logo">
+    <div class="header-brand">
+      <!-- Foto dan teks tampil sebagai satu bagian -->
+      <img src="assets/logo-esma.png" alt="foto ESMA biru" class="logo">
+      <h1 id="greeting"></h1>
+    </div>
 
-    <!-- Greeting mesin ketik -->
-    <h1 id="greeting"></h1>
+    <div class="header-tools">
+      <!-- Info waktu & tanggal -->
+      <div id="datetime-display"></div>
 
-    <!-- Info waktu & tanggal -->
-    <div id="datetime-display"></div>
-
-    <!-- Toggle Dark Mode -->
-    <button id="dark-mode-toggle" title="Light/Dark Mode">🌙</button>
+      <!-- Toggle Dark Mode -->
+      <button id="dark-mode-toggle" title="Light/Dark Mode">🌙</button>
+    </div>
 
   </header>
-
-<!-- ===== SIDEBAR MENGAMBANG (KIRI) ===== -->
-<div id="sidebar-toggle-btn" title="Buka Dashboard">☰</div>
-
-<div id="sidebar" class="sidebar closed">
-  <button id="sidebar-close-btn">✕</button>
-
-  <!-- Tab navigasi -->
-  <div class="sidebar-tabs">
-    <button class="tab-btn active" data-tab="timer">⏱ Timer</button>
-    <button class="tab-btn" data-tab="todo">📝 To-Do</button>
-    <button class="tab-btn" data-tab="links">🔗 Links</button>
-  </div>
-
-  <!-- ===== PANEL TIMER ===== -->
-  <div class="tab-panel active" id="panel-timer">
-    <h3 class="sidebar-title">Focus Timer</h3>
-    <div id="pomodoro-display">25:00</div>
-    <div class="timer-controls">
-      <button id="timer-start">▶ Start</button>
-      <button id="timer-stop">⏸ Stop</button>
-      <button id="timer-reset">↺ Reset</button>
-    </div>
-    <div class="timer-setting">
-      <label>Durasi (menit):
-        <input type="number" id="timer-duration" value="25" min="1" max="120">
-      </label>
-      <button id="timer-set">Set</button>
-    </div>
-  </div>
-
-  <!-- ===== PANEL TO-DO ===== -->
-  <div class="tab-panel" id="panel-todo">
-    <h3 class="sidebar-title">To-Do List</h3>
-    <div class="todo-input-row">
-      <input type="text" id="todo-input" placeholder="Tambah tugas...">
-      <button id="todo-add-btn">+</button>
-    </div>
-    <div class="todo-sort-row">
-      <label>Urutkan:
-        <select id="todo-sort">
-          <option value="default">Default</option>
-          <option value="az">A → Z</option>
-          <option value="done">Selesai dulu</option>
-        </select>
-      </label>
-    </div>
-    <ul id="todo-list"></ul>
-  </div>
-
-  <!-- ===== PANEL QUICK LINKS ===== -->
-  <div class="tab-panel" id="panel-links">
-    <h3 class="sidebar-title">Quick Links</h3>
-    <div class="link-input-group">
-      <input type="text" id="link-name-input" placeholder="Nama link">
-      <input type="url" id="link-url-input" placeholder="https://...">
-      <button id="link-add-btn">+ Tambah</button>
-    </div>
-    <ul id="quick-links-list"></ul>
-  </div>
-</div>
 
   <!-- ===== MAIN SECTION ===== -->
 <section class="main-background">
@@ -97,38 +38,116 @@
       <a href="https://bit.ly/Esma-P3h" class="teks-ungu">Pendaftaran Pendamping Halal</a>
     </div>
     <img src="assets/logo-halal.png" alt="Logo Halal" class="halal-logo">
-    </div>
+  </div>
+
+  <aside class="scroll-notice" id="scroll-notice" aria-label="Petunjuk pengecekan status">
+    <a class="scroll-notice-link" href="#status-check">
+      <span class="scroll-notice-arrow" aria-hidden="true">↓</span>
+      <span class="scroll-notice-copy">
+        <span class="scroll-notice-label">Informasi</span>
+        <strong>Scroll ke bawah untuk pengecekan proses sertifikasi halal Anda</strong>
+      </span>
+    </a>
+    <button class="scroll-notice-toggle" id="scroll-notice-toggle" type="button" aria-expanded="true" aria-label="Ciutkan notifikasi">−</button>
+  </aside>
 </section>
 
 <!-- Menu Cek Status Pengajuan Sertifikat Halal -->
-<section class="hero">
+<section class="hero" id="status-check">
   <div class="hero-content">
-    <h1 class="hero-title">Cek Status Pengajuan Sertifikat Halal</h1>
-    <h2 class="hero-subtitle">Masukkan Nomor Induk Kependudukan ( NIK ) Anda</h2>
-
-<!-- Form Cek Status -->  
-    <form id="status-form">
-     <div class="nik-container">
-      <input type="text" id="nik" placeholder="Masukkan 16 digit NIK anda" required>
-      <button type="submit" id="cek-btn">Cek Status</button>
-    </form>
+    <div class="campaign-banner" role="region" aria-label="Kampanye Wajib Halal Oktober 2026">
+      <div class="campaign-message">
+        <span class="campaign-label">Gerakan Wajib Halal</span>
+        <div class="campaign-marquee" aria-label="Ayo Sukseskan Wajib Halal Oktober 2026">
+          <div class="campaign-track">
+            <strong>Ayo Sukseskan Wajib Halal Oktober 2026</strong>
+            <strong aria-hidden="true">Ayo Sukseskan Wajib Halal Oktober 2026</strong>
+          </div>
+        </div>
+      </div>
+      <img class="campaign-portrait" src="assets/siti.tellunjuk.png" alt="Siti Maesaroh berjilbab menunjuk ke arah slogan">
     </div>
+
+    <span class="status-badge">Status Pengajuan</span>
+    <h1 class="hero-title">Cek Status Pengajuan Sertifikat Halal</h1>
+    <h2 class="hero-subtitle">Masukkan Kode Verifikasi Anda</h2>
+
+    <form id="status-form" class="status-form">
+      <div class="registration-container">
+        <input type="text" id="registration-no" placeholder="Masukkan kode verifikasi anda" maxlength="20" required>
+        <button type="submit" id="cek-btn">Cek Status</button>
+      </div>
+    </form>
+
     <div id="result"></div>
+  </div>
+  </section>
 
-    <!-- Logo Sponsor dan Contact Person -->
-    <h2 class="hero-subtitle">Klinik Sehati Unit Bondolharjo didukung Oleh:</h2>
+  <section class="media-gallery" aria-label="Dokumentasi kegiatan dan infografis">
+    <div class="media-gallery-inner">
+      <section class="media-group" aria-labelledby="documentation-title">
+        <div class="media-section-heading">
+          <span class="media-section-kicker">Cerita &amp; kegiatan</span>
+          <h2 id="documentation-title">Dokumentasi Kegiatan</h2>
+        </div>
+        <div class="activity-grid">
+          <a class="activity-card media-card-link" href="documents/dokumentasi-kegiatan/artikel-01.html">
+            <div class="media-placeholder activity-placeholder"><span class="placeholder-number">01</span><span>Foto kegiatan</span></div>
+            <div class="activity-caption"><span>Dokumentasi 01</span><h3>Judul Kegiatan</h3></div>
+          </a>
+          <a class="activity-card media-card-link" href="documents/dokumentasi-kegiatan/artikel-02.html">
+            <div class="media-placeholder activity-placeholder"><span class="placeholder-number">02</span><span>Foto kegiatan</span></div>
+            <div class="activity-caption"><span>Dokumentasi 02</span><h3>Judul Kegiatan</h3></div>
+          </a>
+          <a class="activity-card media-card-link" href="documents/dokumentasi-kegiatan/artikel-03.html">
+            <div class="media-placeholder activity-placeholder"><span class="placeholder-number">03</span><span>Foto kegiatan</span></div>
+            <div class="activity-caption"><span>Dokumentasi 03</span><h3>Judul Kegiatan</h3></div>
+          </a>
+        </div>
+      </section>
 
-    <!-- Logo sponsor -->
+      <section class="media-group infographic-group" aria-labelledby="infographic-title">
+        <div class="media-section-heading">
+          <span class="media-section-kicker">Panduan visual</span>
+          <h2 id="infographic-title">Infografis</h2>
+        </div>
+        <div class="infographic-grid">
+          <a class="infographic-card media-card-link" href="documents/infografis/artikel-01.html"><div class="media-placeholder infographic-placeholder"><span class="placeholder-number">01</span><span>Infografis</span></div><span class="infographic-caption">Infografis 01</span></a>
+          <a class="infographic-card media-card-link" href="documents/infografis/artikel-02.html"><div class="media-placeholder infographic-placeholder"><span class="placeholder-number">02</span><span>Infografis</span></div><span class="infographic-caption">Infografis 02</span></a>
+          <a class="infographic-card media-card-link" href="documents/infografis/artikel-03.html"><div class="media-placeholder infographic-placeholder"><span class="placeholder-number">03</span><span>Infografis</span></div><span class="infographic-caption">Infografis 03</span></a>
+          <a class="infographic-card media-card-link" href="documents/infografis/artikel-04.html"><div class="media-placeholder infographic-placeholder"><span class="placeholder-number">04</span><span>Infografis</span></div><span class="infographic-caption">Infografis 04</span></a>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <footer class="sponsor-footer">
+    <h2 class="sponsor-footer-title">Klinik Sehati Unit Bondolharjo didukung Oleh:</h2>
     <div class="sponsor-logos">
       <img src="assets/ewi.png" alt="Logo EWI" class="sponsor-logo">
       <img src="assets/kemenpar.png" alt="Logo BPJPH" class="sponsor-logo">
       <img src="assets/sihati.png" alt="Logo Swakarta" class="sponsor-logo">
     </div>
-
-    <!-- Licensed By -->
     <p class="licensed">Licensed By Siti Maesaroh - 2503002531 (2026)</p>
-  </div>
-  </section>
+  </footer>
+
+  <dialog id="document-viewer" class="document-viewer-dialog" aria-labelledby="document-viewer-title">
+    <div class="document-viewer-header">
+      <h2 id="document-viewer-title">Dokumen</h2>
+      <button type="button" id="close-document-viewer" class="document-viewer-close" aria-label="Tutup dokumen">&times;</button>
+    </div>
+    <div class="document-viewer-content">
+      <div class="document-preview">
+        <iframe id="document-pdf" title="Pratinjau dokumen PDF" hidden></iframe>
+        <img id="document-image" alt="Pratinjau dokumen" hidden>
+      </div>
+      <aside class="print-service-panel">
+        <p class="print-service-speaker">Mbak Esma berkata:</p>
+        <p>Perlu bantuan mencetak dokumen ini? Silakan hubungi layanan kami.</p>
+        <a id="print-service-link" class="print-service-link" target="_blank" rel="noopener noreferrer">Pesan layanan cetak via WhatsApp</a>
+      </aside>
+    </div>
+  </dialog>
 
 <!-- Script di akhir -->
   <script src="script.js"></script>
