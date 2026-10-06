@@ -276,10 +276,11 @@ if (darkBtn) {
   });
 }
 
-// ===== EFEK SALJU =====
+// ===== EFEK PARTIKEL HIJAU EMAS =====
 (function () {
   const canvas = document.createElement('canvas');
-  canvas.id = 'snow-canvas';
+  canvas.id = 'particle-canvas';
+  canvas.setAttribute('aria-hidden', 'true');
   document.body.appendChild(canvas);
   const ctx = canvas.getContext('2d');
 
@@ -290,53 +291,61 @@ if (darkBtn) {
   resize();
   window.addEventListener('resize', resize);
 
-  const SNOWFLAKE_COUNT = 120;
-  const snowflakes = [];
+  const PARTICLE_COUNT = 100;
+  const particles = [];
+  const colors = [
+    { red: 18, green: 150, blue: 85 },
+    { red: 212, green: 175, blue: 55 }
+  ];
 
   function randomBetween(min, max) {
     return Math.random() * (max - min) + min;
   }
 
-  function createSnowflake() {
+  function createParticle() {
     return {
       x: randomBetween(0, canvas.width),
-      y: randomBetween(-canvas.height, 0),
-      radius: randomBetween(2, 5),
-      speed: randomBetween(1, 3),
-      drift: randomBetween(-0.5, 0.5),
-      opacity: randomBetween(0.5, 1)
+      y: randomBetween(0, canvas.height),
+      radius: randomBetween(1, 3),
+      speedX: randomBetween(-0.25, 0.25),
+      speedY: randomBetween(-0.35, 0.35),
+      phase: randomBetween(0, Math.PI * 2),
+      twinkleSpeed: randomBetween(0.01, 0.035),
+      opacity: randomBetween(0.4, 0.85),
+      color: colors[Math.floor(Math.random() * colors.length)]
     };
   }
 
-  for (let i = 0; i < SNOWFLAKE_COUNT; i++) {
-    const flake = createSnowflake();
-    flake.y = randomBetween(0, canvas.height);
-    snowflakes.push(flake);
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    particles.push(createParticle());
   }
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    snowflakes.forEach(flake => {
+    particles.forEach(particle => {
+      const opacity = particle.opacity * (0.65 + Math.sin(particle.phase) * 0.35);
       ctx.beginPath();
-      ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${flake.opacity})`;
+      ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${particle.color.red}, ${particle.color.green}, ${particle.color.blue}, ${opacity})`;
       ctx.fill();
     });
   }
 
   function update() {
-    snowflakes.forEach(flake => {
-      flake.y += flake.speed;
-      flake.x += flake.drift;
-      if (flake.y > canvas.height + flake.radius) {
-        flake.y = -flake.radius;
-        flake.x = randomBetween(0, canvas.width);
-        flake.speed = randomBetween(1, 3);
-        flake.drift = randomBetween(-0.5, 0.5);
-        flake.opacity = randomBetween(0.5, 1);
+    particles.forEach(particle => {
+      particle.phase += particle.twinkleSpeed;
+      particle.x += particle.speedX + Math.cos(particle.phase) * 0.15;
+      particle.y += particle.speedY + Math.sin(particle.phase) * 0.15;
+      if (particle.y > canvas.height + particle.radius) {
+        particle.y = -particle.radius;
+        particle.x = randomBetween(0, canvas.width);
       }
-      if (flake.x > canvas.width + flake.radius) flake.x = -flake.radius;
-      if (flake.x < -flake.radius) flake.x = canvas.width + flake.radius;
+      if (particle.y < -particle.radius) {
+        particle.y = canvas.height + particle.radius;
+        particle.x = randomBetween(0, canvas.width);
+      }
+      if (particle.x > canvas.width + particle.radius) particle.x = -particle.radius;
+      if (particle.x < -particle.radius) particle.x = canvas.width + particle.radius;
     });
   }
 
