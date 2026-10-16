@@ -9,158 +9,64 @@
 
   <!-- ===== HEADER ===== -->
 
-  <header>
+<header>
     <div class="header-brand">
-      <!-- Foto dan teks tampil sebagai satu bagian -->
-      <img src="assets/logo-esma.png" alt="foto ESMA biru" class="logo">
-      <h1 id="greeting"></h1>
+      <div class="profile-box">
+        <img src="assets/logo-esma.png" alt="foto ESMA biru" class="logo">
+             <a href="https://esmap3h-lab.github.io/Esma-Blog/" class="profile-name" target="_blank">Siti Maesaroh</a>
+      </div>
+       <div class="header-text">
+         <h1 class="header-title">Layanan Pendampingan Produk Halal area Jawa Tengah</h1>
+           <p class="header-subtitle">Klinik SEHATI Unit Bondolharjo</p>
+           <div id="calendar-info" class="calendar-info"></div>
+
+           <!-- Tombol Navigasi -->
+    <nav class="main-menu">
+    <div class="menu-item">
+        <a href="home.html">HOME</a>
     </div>
 
-    <div class="header-tools">
-      <!-- Info waktu & tanggal -->
-      <div id="datetime-display"></div>
-
-      <!-- Toggle Dark Mode -->
-      <button id="dark-mode-toggle" title="Light/Dark Mode">🌙</button>
+    <div class="menu-item">
+        <a href="https://sertifikasihalal.id/?ref=v7R2S"
+           target="_blank"
+           rel="noopener noreferrer">
+            SEHATI
+        </a>
     </div>
 
-  </header>
+    <div class="menu-item">
+        <a href="https://ppph.id/?ref=v7R2S"
+           target="_blank"
+           rel="noopener noreferrer">
+            HALAL ADVISOR
+        </a>
+    </div>
+
+    <div class="menu-item">
+        <a href="about.html">ABOUT</a>
+    </div>
+ </nav>
+       </div>
+    </div>
+</header>
 
   <!-- ===== MAIN SECTION ===== -->
 <section class="main-background">
-
   <!-- Konten Landing Page -->
-  <div class="landing-page">
-    <h1 class="judul">Klinik Sehati Unit Bondolharjo</h1>
-    <h1 class="deskripsi">Sahabat Halal bagi UMKM dan Halal Advisor area Jawa Tengah</h2>
-    <div class="link-row">
-      <a href="https://bit.ly/SEHATI-Jateng" class="teks-ungu">Pendaftaran Sertifikat Halal Gratis</a>
-      <a href="https://bit.ly/Esma-P3h" class="teks-ungu">Pendaftaran Pendamping Halal</a>
-    </div>
+  <div class="landing-page"></div>
     <img src="assets/logo-halal.png" alt="Logo Halal" class="halal-logo">
-  </div>
-
-  <aside class="scroll-notice" id="scroll-notice" aria-label="Petunjuk pengecekan status">
-    <a class="scroll-notice-link" href="#status-check">
-      <span class="scroll-notice-arrow" aria-hidden="true">↓</span>
-      <span class="scroll-notice-copy">
-        <span class="scroll-notice-label">Informasi</span>
-        <strong>Scroll ke bawah untuk pengecekan proses sertifikasi halal Anda</strong>
-      </span>
-    </a>
-    <button class="scroll-notice-toggle" id="scroll-notice-toggle" type="button" aria-expanded="true" aria-label="Ciutkan notifikasi">−</button>
-  </aside>
-</section>
-
-<!-- Menu Cek Status Pengajuan Sertifikat Halal -->
-<section class="hero" id="status-check">
-  <div class="hero-content">
-    <div class="campaign-banner" role="region" aria-label="Kampanye Wajib Halal Oktober 2026">
-      <div class="campaign-message">
-        <span class="campaign-label">Gerakan Wajib Halal</span>
-        <div class="campaign-marquee" aria-label="Ayo Sukseskan Wajib Halal Oktober 2026">
-          <div class="campaign-track">
-            <strong>Ayo Sukseskan Wajib Halal Oktober 2026</strong>
-            <strong aria-hidden="true">Ayo Sukseskan Wajib Halal Oktober 2026</strong>
-          </div>
-        </div>
-      </div>
-      <img class="campaign-portrait" src="assets/siti.tellunjuk.png" alt="Siti Maesaroh berjilbab menunjuk ke arah slogan">
-    </div>
-
-    <span class="status-badge">Status Pengajuan</span>
-    <h1 class="hero-title">Cek Status Pengajuan Sertifikat Halal</h1>
-    <h2 class="hero-subtitle">Masukkan Kode Verifikasi Anda</h2>
-
-    <form id="status-form" class="status-form">
-      <div class="registration-container">
-        <input type="text" id="registration-no" placeholder="Masukkan kode verifikasi anda" maxlength="20" required>
-        <button type="submit" id="cek-btn">Cek Status</button>
-      </div>
-    </form>
-
-    <div id="result"></div>
-  </div>
-  </section>
-
-  <section class="media-gallery" aria-label="Dokumentasi kegiatan dan infografis">
-    <div class="media-gallery-inner">
-      <section class="media-group" aria-labelledby="documentation-title">
-        <div class="media-section-heading">
-          <span class="media-section-kicker">Cerita &amp; kegiatan</span>
-          <h2 id="documentation-title">Dokumentasi Kegiatan</h2>
-        </div>
-        <div class="activity-grid">
-          <a class="activity-card media-card-link" href="documents/dokumentasi-kegiatan/artikel-01.html">
-            <div class="media-placeholder activity-placeholder"><span class="placeholder-number">01</span><span>Foto kegiatan</span></div>
-            <div class="activity-caption"><span>Dokumentasi 01</span><h3>Judul Kegiatan</h3></div>
-          </a>
-          <a class="activity-card media-card-link" href="documents/dokumentasi-kegiatan/artikel-02.html">
-            <div class="media-placeholder activity-placeholder"><span class="placeholder-number">02</span><span>Foto kegiatan</span></div>
-            <div class="activity-caption"><span>Dokumentasi 02</span><h3>Judul Kegiatan</h3></div>
-          </a>
-          <a class="activity-card media-card-link" href="documents/dokumentasi-kegiatan/artikel-03.html">
-            <div class="media-placeholder activity-placeholder"><span class="placeholder-number">03</span><span>Foto kegiatan</span></div>
-            <div class="activity-caption"><span>Dokumentasi 03</span><h3>Judul Kegiatan</h3></div>
-          </a>
-        </div>
-      </section>
-
-      <section class="media-group infographic-group" aria-labelledby="infographic-title">
-        <div class="media-section-heading">
-          <span class="media-section-kicker">Panduan visual</span>
-          <h2 id="infographic-title">Infografis</h2>
-        </div>
-        <div class="infographic-grid">
-          <a class="infographic-card media-card-link" href="documents/infografis/artikel-01.html"><div class="media-placeholder infographic-placeholder"><span class="placeholder-number">01</span><span>Infografis</span></div><span class="infographic-caption">Infografis 01</span></a>
-          <a class="infographic-card media-card-link" href="documents/infografis/artikel-02.html"><div class="media-placeholder infographic-placeholder"><span class="placeholder-number">02</span><span>Infografis</span></div><span class="infographic-caption">Infografis 02</span></a>
-          <a class="infographic-card media-card-link" href="documents/infografis/artikel-03.html"><div class="media-placeholder infographic-placeholder"><span class="placeholder-number">03</span><span>Infografis</span></div><span class="infographic-caption">Infografis 03</span></a>
-          <a class="infographic-card media-card-link" href="documents/infografis/artikel-04.html"><div class="media-placeholder infographic-placeholder"><span class="placeholder-number">04</span><span>Infografis</span></div><span class="infographic-caption">Infografis 04</span></a>
-        </div>
-      </section>
-    </div>
-  </section>
-
-  <footer class="sponsor-footer">
-    <h2 class="sponsor-footer-title">Klinik Sehati Unit Bondolharjo didukung Oleh:</h2>
+    
+    <footer class="sponsor-footer">
     <div class="sponsor-logos">
       <img src="assets/ewi.png" alt="Logo EWI" class="sponsor-logo">
       <img src="assets/kemenpar.png" alt="Logo BPJPH" class="sponsor-logo">
       <img src="assets/sihati.png" alt="Logo Swakarta" class="sponsor-logo">
     </div>
-    <p class="licensed">Licensed By Siti Maesaroh - 2503002531 (2026)</p>
+    <p class="licensed">Licensed By Siti Maesaroh - 2026</p>
   </footer>
-
-  <dialog id="document-viewer" class="document-viewer-dialog" aria-labelledby="document-viewer-title">
-    <div class="document-viewer-header">
-      <h2 id="document-viewer-title">Dokumen</h2>
-      <button type="button" id="close-document-viewer" class="document-viewer-close" aria-label="Tutup dokumen">&times;</button>
-    </div>
-    <div class="document-viewer-content">
-      <div class="document-preview">
-        <iframe id="document-pdf" title="Pratinjau dokumen PDF" hidden></iframe>
-        <img id="document-image" alt="Pratinjau dokumen" hidden>
-      </div>
-      <aside class="print-service-panel">
-        <p class="print-service-speaker">Mbak Esma berkata:</p>
-        <p>Perlu bantuan mencetak dokumen ini? Silakan hubungi layanan kami.</p>
-        <a id="print-service-link" class="print-service-link" target="_blank" rel="noopener noreferrer">Pesan layanan cetak via WhatsApp</a>
-      </aside>
-    </div>
-  </dialog>
+</section>
 
 <!-- Script di akhir -->
   <script src="script.js"></script>
-
-  <!-- Tombol WhatsApp + Label mengambang di kanan bawah -->
-  <div class="wa-wrapper">
-    <div class="wa-label-box">Layanan Pengaduan</div>
-    <a href="https://bit.ly/wa.me/628989096818" class="whatsapp-float" target="_blank" title="Hubungi via WhatsApp">
-      <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-        <circle cx="24" cy="24" r="24" fill="#25D366"/>
-        <path fill="#fff" d="M24 10C16.27 10 10 16.27 10 24c0 2.52.68 4.88 1.87 6.93L10 38l7.3-1.83A13.93 13.93 0 0 0 24 38c7.73 0 14-6.27 14-14S31.73 10 24 10zm6.94 19.39c-.29.82-1.7 1.57-2.33 1.63-.6.06-1.16.27-3.9-.81-3.27-1.28-5.37-4.63-5.53-4.85-.16-.22-1.3-1.73-1.3-3.3s.82-2.34 1.11-2.66c.29-.32.64-.4.85-.4l.61.01c.2 0 .46-.08.72.55.27.64.92 2.25.99 2.41.08.16.13.35.03.56-.1.2-.15.33-.3.51-.16.18-.33.4-.47.54-.16.16-.32.33-.14.65.18.32.82 1.35 1.76 2.19 1.21 1.08 2.23 1.41 2.55 1.57.32.16.51.13.7-.08.18-.2.79-.92 1-1.24.21-.32.42-.27.71-.16.29.11 1.84.87 2.16 1.03.32.16.53.24.61.37.08.14.08.78-.21 1.6z"/>
-      </svg>
-    </a>
-  </div>
 </body>
 </html>

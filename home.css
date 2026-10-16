@@ -1,0 +1,44 @@
+/* ===== GLOBAL ===== */
+body
+html
+
+/* ===== HEADER ===== */
+header
+.header-brand
+.logo
+.profile-name
+.header-title
+.header-subtitle
+.calendar-info
+
+/* ===== MENU ===== */
+.main-menu
+.menu-item
+
+/* ===== FOOTER ===== */
+.sponsor-footer
+.sponsor-logos
+.sponsor-logo
+.licensed
+
+/* ===== WHATSAPP ===== */
+.wa-wrapper
+.wa-label-box
+.whatsapp-float
+.wa-icon
+
+/* ===== DOCUMENT VIEWER ===== */
+.document-viewer
+
+.hero-center{
+    display:flex;
+    justify-content:bottom-center;
+    align-items:bottom;
+}
+
+.hero-photo{
+    width:600px;
+    max-width:100%;
+    height:auto;
+    object-fit:contain;
+}
