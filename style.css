@@ -24,16 +24,12 @@ header{
     top: 0;
     left: 0;
     width: 100%;
-
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-
-    padding: 20px 2cm 20px 8cm;
+    padding: 12px 40px 12px 60px;
     box-sizing: border-box;
-
     z-index: 9999;
-
     background: linear-gradient(
         125deg,
         #eadb9b 0%,
@@ -60,46 +56,29 @@ header::after{
         #b996dd
     );
 }
-header::before{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:8px;
-    width:100%;
-    height:3px;
 
-    background: linear-gradient(
-        90deg,
-        rgba(185,150,221,.2),
-        rgba(79,60,99,.8),
-        rgba(185,150,221,.2)
-    );
-}
+/*-- Logo dan Nama --*/
+
 .logo{
-    width:100px;
-    height:100px;
+    width:80px;
+    height:80px;
     flex-shrink:0;
-
     border-radius:50%;
     border:8px solid #d4af37;
-
     object-fit:cover;
 }
-
-/* ===== HEADER BRAND ===== */
-
 .header-brand{
-    margin-left:auto;
-
     display:flex;
     flex-direction:column;
+    margin-top: 10px;
+    margin-bottom: 10px;
     align-items:center;
-    gap:10px;
-    flex-shrink:0;
+    justify-content:center;
+
+    gap:12px;
 }
 .header-content{
     flex:1;
-
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -108,35 +87,26 @@ header::before{
 .profile-box{
     display:flex;
     flex-direction:column;
-    align-items:flex-end;
+    align-items:center;
 }
 .profile-name{
     display:inline-block;
-
-    margin-top:8px;
-
+    margin-top:0px;
     font-size:20px;
-
     padding:6px 16px;
-
     color:white;
-
     background:#d4af37;
-
     text-decoration:none;
-
     border:2px solid #f4d06f;
-    border-radius:30px;
-
+    border-radius:10px;
     transition:.3s;
 }
 .profile-name:hover{
     background:white;
-
     color:#6c4b8a;
-
     transform:translateY(-2px);
 }
+
 .header-text{
     display:flex;
     flex-direction:column;
@@ -144,18 +114,14 @@ header::before{
 }
 .header-title{
     margin:10px;
-
-    font-size:32px;
+    font-size:28px;
     font-weight:700;
-
     color:#4f3c63;
 }
 .header-subtitle{
     margin:8px 0 0;
-
-    font-size:28px;
+    font-size:24px;
     font-weight:600;
-
     color:#6c4b8a;
     text-align:center;
 }
@@ -163,33 +129,14 @@ header::before{
 /* ===== TANGGAL ===== */
 .calendar-info{
     margin-top:12px;
-
     min-height:28px;
-
     color:#b8860b;
-
-    font-size:30px;
+    font-size:26px;
     font-weight:500;
-
     text-align:center;
 }
 .main-background{
-    padding-top: 300px;
-}
-
-/* ===== ANIMASI LOGO ===== */
-@keyframes revealLogo{
-    from{
-        clip-path:inset(0 100% 0 0);
-    }
-    to{
-        clip-path:inset(0);
-    }
-}
-
-.logo.typing-reveal{
-    animation:
-        revealLogo var(--typing-duration) linear both;
+    padding-top: 200px;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -222,18 +169,10 @@ header::before{
         font-size:16px;
     }
 }
-.landing-page{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    background: transparant;
-    padding-bottom:0;
-}
-
 .menu-item button{
     background: transparent;
     border: none;
-    color: #0b5d1e;
+    color: purple;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -241,7 +180,7 @@ header::before{
 }
 
 .menu-item button:hover{
-    color: #198754;
+    color: purple;
 }
 
 .menu-item{
@@ -289,42 +228,86 @@ header::before{
     z-index:99999;
 }
 
-.welcome-text{
-    max-width:100%;
-    overflow:hidden;
-    white-space:nowrap;
+/* ===== RESPONSIVE ===== */
+
+@media (max-width:1350px){
+
+    header{
+        grid-template-columns:1fr;
+        justify-items:center;
+        gap:12px;
+    }
+
+    .header-brand{
+        grid-column:1;
+        width:100%;
+        justify-content:center;
+        gap:14px;
+    }
+
+    .header-title{
+        font-size:28px;
+        text-align:center;
+    }
+
+    .header-subtitle{
+        font-size:22px;
+    }
+
+    .calendar-info{
+        font-size:16px;
+    }
 }
-.welcome-badge{
-    display:inline-block;
+.welcome-banner{
+    width:100%;
 
-    font-size:30px;
-    font-weight:600;
+    overflow:hidden;
 
-    padding:5px 5px;
+    padding:20px 0;
+    margin-top:30px;
+    margin-bottom:30px;
 
-    background:#ffffff;
-    color:#6c4b8a;
+    border-radius:16px;
 
-    border-radius:40px;
-
-    border:2px solid rgba(185,150,221,.35);
+    background:linear-gradient(
+        90deg,
+        #d4af37,
+        #f4d06f,
+        #d4af37
+    );
 
     box-shadow:
-        0 8px 25px rgba(108,75,138,.12);
-
-    text-shadow:none;
-
-    position:relative;
-
-    animation:runningText 15s linear infinite;
+        0 8px 20px rgba(212,175,55,.25);
 }
-@keyframes runningText{
+.welcome-banner h2{
+    margin:0;
+
+    display:inline-block;
+
+    white-space:nowrap;
+
+    padding:12px 30px;
+
+    color:whitesmoke;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    font-family:"Cormorant Garamond", serif;
+
+    animation:marquee 25s linear infinite;
+}
+@keyframes marquee{
+
     from{
-        transform: translateX(-100%);
+        transform:translateX(-100%);
     }
+
     to{
-        transform: translateX(100vw);
+        transform:translateX(100vw);
     }
+
 }
 
 /* ===== Papan Informasi ===== */
@@ -339,10 +322,9 @@ header::before{
 
     margin:40px auto;
 
-    padding:10px 36px;
+    padding: 15px 20px 15px 50px;
 
     border-radius:10px;
-
     background:
         linear-gradient(
             135deg,
@@ -351,12 +333,11 @@ header::before{
         );
 
     backdrop-filter:blur(10px);
-
     box-shadow:
         0 12px 30px rgba(0,0,0,.08);
 }
 .announcement-image{
-    width:30%;
+    width:20%;
     align-items: flex-end;
     display:flex;
     align-items:flex-end;
@@ -485,7 +466,7 @@ header::before{
     width:100%;
 
     padding:0px 0;
-    margin:0;
+    margin-top: 10px;
 
     display:flex;
     flex-direction:column;

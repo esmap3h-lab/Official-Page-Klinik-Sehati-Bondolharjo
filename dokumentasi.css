@@ -25,16 +25,12 @@ header{
     top: 0;
     left: 0;
     width: 100%;
-
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-
-    padding: 20px 2cm 20px 8cm;
+    padding: 12px 40px 12px 60px;
     box-sizing: border-box;
-
     z-index: 9999;
-
     background: linear-gradient(
         125deg,
         #eadb9b 0%,
@@ -61,46 +57,28 @@ header::after{
         #b996dd
     );
 }
-header::before{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:8px;
-    width:100%;
-    height:3px;
 
-    background: linear-gradient(
-        90deg,
-        rgba(185,150,221,.2),
-        rgba(79,60,99,.8),
-        rgba(185,150,221,.2)
-    );
-}
+/*-- Logo dan Nama --*/
+
 .logo{
-    width:100px;
-    height:100px;
+    width:80px;
+    height:80px;
     flex-shrink:0;
-
     border-radius:50%;
     border:8px solid #d4af37;
-
     object-fit:cover;
 }
-
-/* ===== HEADER BRAND ===== */
-
 .header-brand{
-    margin-left:auto;
-
     display:flex;
     flex-direction:column;
+
     align-items:center;
-    gap:10px;
-    flex-shrink:0;
+    justify-content:center;
+
+    gap:12px;
 }
 .header-content{
     flex:1;
-
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -109,35 +87,26 @@ header::before{
 .profile-box{
     display:flex;
     flex-direction:column;
-    align-items:flex-end;
+    align-items:center;
 }
 .profile-name{
     display:inline-block;
-
-    margin-top:8px;
-
+    margin-top:0px;
     font-size:20px;
-
     padding:6px 16px;
-
     color:white;
-
     background:#d4af37;
-
     text-decoration:none;
-
     border:2px solid #f4d06f;
-    border-radius:30px;
-
+    border-radius:10px;
     transition:.3s;
 }
 .profile-name:hover{
     background:white;
-
     color:#6c4b8a;
-
     transform:translateY(-2px);
 }
+
 .header-text{
     display:flex;
     flex-direction:column;
@@ -145,18 +114,14 @@ header::before{
 }
 .header-title{
     margin:10px;
-
-    font-size:32px;
+    font-size:28px;
     font-weight:700;
-
     color:#4f3c63;
 }
 .header-subtitle{
     margin:8px 0 0;
-
-    font-size:28px;
+    font-size:24px;
     font-weight:600;
-
     color:#6c4b8a;
     text-align:center;
 }
@@ -164,33 +129,14 @@ header::before{
 /* ===== TANGGAL ===== */
 .calendar-info{
     margin-top:12px;
-
     min-height:28px;
-
     color:#b8860b;
-
-    font-size:30px;
+    font-size:26px;
     font-weight:500;
-
     text-align:center;
 }
 .main-background{
-    padding-top: 300px;
-}
-
-/* ===== ANIMASI LOGO ===== */
-@keyframes revealLogo{
-    from{
-        clip-path:inset(0 100% 0 0);
-    }
-    to{
-        clip-path:inset(0);
-    }
-}
-
-.logo.typing-reveal{
-    animation:
-        revealLogo var(--typing-duration) linear both;
+    padding-top: 200px;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -281,10 +227,7 @@ header::before{
     position:relative;
     z-index:99999;
 }
-.documentation-content{
-    min-height: 60vh;
-    padding-top: 220px;
-}
+
 .knowledge-layout{
     position:relative;
     max-width:95%;
@@ -292,7 +235,7 @@ header::before{
     margin:2cm auto;
 
     padding:
-        200px
+        120px
         20px
         20px
         20px;
@@ -300,8 +243,8 @@ header::before{
     display:grid;
 
     grid-template-columns:
-        70%
-        30%;
+        30%
+        70%;
 
     gap:10px;
 
@@ -318,33 +261,6 @@ header::before{
     color:#5d3f88;
 
     margin-bottom:24px;
-}
-.empty-state h1{
-    font-family:"Cormorant Garamond", serif;
-
-    background:linear-gradient(
-        90deg,
-        #6c4b8a,
-        #b996dd,
-        #d4af37
-    );
-
-    background-clip:text;
-    -webkit-background-clip:text;
-
-    color:transparent;
-    -webkit-text-fill-color:transparent;
-}
-.empty-state p{
-    font-family:"Inter", sans-serif;
-
-    font-size:22px;
-
-    line-height:1.9;
-
-    color:#4f3c63;
-
-    max-width:900px;
 }
 .knowledge-label{
     font-family:"Inter", sans-serif;
@@ -394,7 +310,7 @@ header::before{
 );
 }
 .knowledge-content{
-    min-height:700px;
+    min-height:400px;
 
     padding:48px;
 
@@ -481,4 +397,234 @@ linear-gradient(
     letter-spacing: 1px;
     text-align: center;
     opacity: 0.8;
+}
+
+
+.knowledge-article{
+    max-width:100%;
+    padding: 0;
+}
+
+.article-category{
+    color:#d4af37;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+.article-title{
+    font-size:50px;
+    line-height:1.15;
+    color:#4f3c63;
+    margin-bottom:5px;
+}
+.article-info{
+    margin:10px 0 10px;
+
+    padding:10px 10px;
+
+    border-left:4px solid #d4af37;
+
+    background:rgba(255,255,255,.35);
+
+    border-radius:5px;
+}
+.article-info p{
+    margin:10px 0 5px;
+    font-size:18px;
+}
+.article-info p:last-child{
+    margin-bottom:0;
+}
+.article-info strong{
+    color:#5d3f88;
+}
+.knowledge-article h2{
+    margin-top:60px;
+    margin-bottom:20px;
+
+    font-size:34px;
+    font-weight:700;
+
+    color:#5d3f88;
+}
+.knowledge-article p{
+    text-align:justify;
+
+    line-height:2;
+
+    font-size:22px;
+
+    color:#333;
+
+    margin-bottom:24px;
+}
+
+.knowledge-content{
+    padding:90px 90px 60px 70px;
+}
+.knowledge-article p{
+    line-height:2;
+    font-size:22px;
+    color:#333;
+    margin-bottom:24px;
+}
+.article-image img{
+    width:80%;
+    display:block;
+    margin:12px auto;
+    border-radius:20px;
+}
+.article-image figcaption{
+    margin-top:12px;
+
+    text-align:center;
+
+    font-size:20px;
+    font-style:italic;
+
+    color:#7a658f;
+}
+.knowledge-article ul{
+    padding-left:35px;
+}
+.knowledge-article li{
+    font-size:22px;
+
+    line-height:2.2;
+
+    color:#4f3c63;
+}
+.knowledge-article h3{
+    font-size:32px;
+    color:#5d3f88;
+
+    margin-top:60px;
+    margin-bottom:20px;
+
+    position:relative;
+}
+.knowledge-article h3::after{
+    content:'';
+
+    display:block;
+
+    width:220px;
+    height:3px;
+
+    margin-top:12px;
+
+    background:linear-gradient(
+        90deg,
+        #d4af37,
+        rgba(212,175,55,.2)
+    );
+
+    border-radius:10px;
+}
+.article-card{
+    margin-top:30px;
+
+    background:rgba(255,255,255,.45);
+
+    border:1px solid rgba(185,150,221,.20);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    backdrop-filter:blur(10px);
+
+    transition:all .3s ease;
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,.05);
+}
+.article-card:hover{
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 16px 36px rgba(93,63,136,.12);
+}
+.article-card img{
+    width:100%;
+
+    display:block;
+
+    object-fit:cover;
+}
+.article-card h3{
+    margin:20px 20px 10px;
+
+    font-size:24px;
+
+    line-height:1.4;
+
+    color:#5d3f88;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+}
+.article-card p{
+    margin:0 20px 20px;
+
+    font-size:16px;
+
+    line-height:1.8;
+
+    color:#5f5f5f;
+}
+.read-more{
+    display:inline-block;
+
+    margin:
+        0
+        20px
+        20px;
+
+    padding:
+        12px
+        20px;
+
+    border-radius:12px;
+
+    background:#d4af37;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s ease;
+}
+.read-more:hover{
+    background:#b9962d;
+}
+.article-tag{
+    display:inline-block;
+
+    margin:
+        20px
+        20px
+        0;
+
+    padding:
+        6px
+        12px;
+
+    border-radius:999px;
+
+    background:
+        rgba(212,175,55,.15);
+
+    color:#b28704;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
 }

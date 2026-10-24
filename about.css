@@ -152,21 +152,6 @@ header::before{
     padding-top: 300px;
 }
 
-/* ===== ANIMASI LOGO ===== */
-@keyframes revealLogo{
-    from{
-        clip-path:inset(0 100% 0 0);
-    }
-    to{
-        clip-path:inset(0);
-    }
-}
-
-.logo.typing-reveal{
-    animation:
-        revealLogo var(--typing-duration) linear both;
-}
-
 /* ===== RESPONSIVE ===== */
 
 @media (max-width:1350px){
@@ -297,17 +282,41 @@ header::before{
     max-width:100%;
     text-align: center;
 }
-
 .welcome-badge{
     display:inline-block;
-    font-size: 20px;
-    padding:8px 16px;
-    background:#d4af37;
-    color:white;
-    border-radius:30px;
-    font-weight:700;
-}
 
+    font-size:24px;
+
+    padding:8px 16px;
+
+    background:whitesmoke;
+
+    color:goldenrod;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    animation:slide-right 25s linear infinite;
+}
+@keyframes slide-right{
+
+    /* Bergerak dari kiri ke kanan */
+    0%{
+        transform:translateX(-100%);
+    }
+
+    80%{
+        transform:translateX(100vw);
+    }
+
+    /* Diam 1 detik di kanan */
+    100%{
+        transform:translateX(100vw);
+    }
+}
 .welcome-title{
     margin-top:20px;
     white-space: nowrap;
